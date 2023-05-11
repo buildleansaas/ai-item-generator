@@ -1,4 +1,4 @@
-import { poems } from "@/poems";
+import { items } from "@/items";
 import { ChatBubbleOvalLeftEllipsisIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
@@ -25,7 +25,7 @@ function splitIntoFourColumns<T>(array: T[], chunks: number): T[][] {
   return out;
 }
 
-const [first, second, third, fourth] = splitIntoFourColumns(poems, 4);
+const [first, second, third, fourth] = splitIntoFourColumns(items, 4);
 
 export function Footer() {
   return (
@@ -36,13 +36,13 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8 pb-16 sm:pb-24 lg:pb-32 pt-16">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div>
-            <span className="sr-only">Poem Generator</span>
+            <span className="sr-only">Item Generator</span>
             <ChatBubbleOvalLeftEllipsisIcon className="w-6 h-6" />
           </div>
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <ul role="list" className="space-y-4">
-                {first.map((item) => (
+                {first?.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
@@ -54,7 +54,7 @@ export function Footer() {
                 ))}
               </ul>
               <ul role="list" className="space-y-4 mt-4 md:mt-0">
-                {second.map((item) => (
+                {second?.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
@@ -68,7 +68,7 @@ export function Footer() {
             </div>
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <ul role="list" className="space-y-4">
-                {third.map((item) => (
+                {third?.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
@@ -80,7 +80,7 @@ export function Footer() {
                 ))}
               </ul>
               <ul role="list" className="space-y-4 mt-4 md:mt-0">
-                {fourth.map((item) => (
+                {fourth?.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}

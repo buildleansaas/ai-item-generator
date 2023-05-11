@@ -1,21 +1,21 @@
 "use client";
 
-import { Optional, Poem } from "@/types";
+import { Optional, Item } from "@/types";
 import { Loading } from "@/components/Loading";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
-type PoemProperties = JSX.IntrinsicElements["article"] & {
-  poem: Optional<Poem, "options">;
+type itemProperties = JSX.IntrinsicElements["article"] & {
+  item: Optional<Item, "options">;
 };
 
-export function PoemCard({
-  poem: { response, options },
+export function ItemCard({
+  item: { response, options },
   className,
   children,
   ...properties
-}: PoemProperties) {
+}: itemProperties) {
   const [copied, setCopied] = useState(false);
   const [copying, setCopying] = useState(false);
   const [regenerating, setRegenerating] = useState(false);

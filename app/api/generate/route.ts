@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
   const options: Options = await request.json();
 
   const content = `Write a ${
-    options.type === "Random Poem" ? "poem" : options.type.toLowerCase()
+    options.type === "Random Item" ? "item" : options.type.toLowerCase()
   } about ${options.prompt}`;
 
   const stream = await createOpenAIStream({

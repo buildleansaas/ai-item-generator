@@ -1,7 +1,7 @@
 import { Container } from "@/components/Container";
 import { HeroPattern } from "@/components/HeroPattern";
-import { PoemGenerator } from "@/components/PoemGenerator";
-import { poems } from "@/poems";
+import { ItemGenerator } from "@/components/ItemGenerator";
+import { items } from "@/items";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
@@ -10,42 +10,42 @@ export default function HomePage() {
     <Container className="pt-16 pb-24">
       <HeroPattern />
       <h1 className="sm:text-center text-4xl/snug sm:text-5xl/snug md:text-6xl/snug font-bold tracking-tight text-gray-800 mb-16 sm:mb-24 lg:mb-32">
-        Poem Generator
+        Item Generator
       </h1>
-      <PoemGenerator />
+      <ItemGenerator />
       <div className="mt-24 sm:mt-32 rounded-lg grid sm:grid-cols-2 gap-4">
-        {poems.map((poem) => (
+        {items.map((item) => (
           <div
-            key={poem.name}
+            key={item.name}
             className={twMerge(
               "group relative p-6 focus-within:outline focus-within:outline-2 rounded-3xl",
-              poem.classNames.focusWithin,
-              poem.classNames.background
+              item.classNames.focusWithin,
+              item.classNames.background
             )}
           >
             <h2
               className={twMerge(
                 "text-xl font-semibold tracking-tight leading-6",
-                poem.classNames.title
+                item.classNames.title
               )}
             >
-              <Link href={poem.href} className="focus:outline-none">
+              <Link href={item.href} className="focus:outline-none">
                 <span className="absolute inset-0" aria-hidden="true" />
-                {poem.name}
+                {item.name}
               </Link>
             </h2>
             <p
               className={twMerge(
                 "mt-8 text-sm opacity-80 saturate-50",
-                poem.classNames.title
+                item.classNames.title
               )}
             >
-              {poem.description}
+              {item.description}
             </p>
             <span
               className={twMerge(
                 "pointer-events-none absolute right-6 top-6 opacity-30 group-hover:opacity-60",
-                poem.classNames.title
+                item.classNames.title
               )}
               aria-hidden="true"
             >

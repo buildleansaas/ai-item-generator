@@ -14,11 +14,14 @@ type Tier = {
   price: string;
 };
 
+// example: `https://poetry-tips-git-${process.env.VERCEL_GIT_COMMIT_REF}-gregives.vercel.app`;
+const YOUR_REVIEW_APP_VERCEL_URL = ``;
+
 const origin =
   process.env.VERCEL_ENV === "preview" &&
   typeof process.env.VERCEL_GIT_COMMIT_REF === "string"
-    ? `https://poetry-tips-git-${process.env.VERCEL_GIT_COMMIT_REF}-gregives.vercel.app`
-    : "https://www.poetry.tips";
+    ? YOUR_REVIEW_APP_VERCEL_URL
+    : "https://www.DOMAIN";
 
 export default async function CreditsPage() {
   const session = await getServerSession();
@@ -93,12 +96,12 @@ export default async function CreditsPage() {
               href="/"
               className="text-green-600 rounded-lg focus:outline-none focus-visible:outline-2 focus-visible:outline-gray-800"
             >
-              Why not generate a poem?
+              Why not generate a item?
             </Link>{" "}
             {credits !== "Unlimited" && "Or top your credits up below."}
           </>
         ) : (
-          "If you want to generate any more poems, you’ll need to buy some more credits below."
+          "If you want to generate any more items, you’ll need to buy some more credits below."
         )}
       </p>
       <div className="mt-8 sm:mt-12 isolate mx-auto grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">

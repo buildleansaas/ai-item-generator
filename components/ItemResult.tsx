@@ -2,12 +2,12 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { PoemCard } from "./PoemCard";
+import { ItemCard } from "./ItemCard";
 import { Options } from "@/types";
 
 const textDecoder = new TextDecoder();
 
-export function PoemResult() {
+export function ItemResult() {
   const [result, setResult] = useState("");
   const [visible, setVisible] = useState(true);
   const [loading, setLoading] = useState(true);
@@ -22,7 +22,7 @@ export function PoemResult() {
       const options = localStorage.getItem("options");
 
       if (options === null || generate !== "true") {
-        // Hide the poem result as soon as possible
+        // Hide the item result as soon as possible
         setVisible(false);
         router.replace("/saved");
         return;
@@ -82,8 +82,8 @@ export function PoemResult() {
   }
 
   return (
-    <PoemCard
-      poem={{
+    <ItemCard
+      item={{
         options,
         response: result,
         createdAt: Date.now(),
@@ -93,6 +93,6 @@ export function PoemResult() {
       {loading && (
         <span className="text-gray-300 animate-blink">{"\u258C"}</span>
       )}
-    </PoemCard>
+    </ItemCard>
   );
 }

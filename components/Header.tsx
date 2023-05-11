@@ -17,14 +17,14 @@ import {
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { twMerge } from "tailwind-merge";
 import { Container } from "./Container";
-import { TypeOfPoem, poems } from "@/poems";
+import { TypeOfItem, items } from "@/items";
 import { LogIn } from "./LogIn";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const popularPoems = ["Couplet", "Haiku", "Limerick", "Sonnet", "Villanelle"]
-  .map((type) => poems.find((poem) => poem.name === type))
-  .filter((poem): poem is TypeOfPoem => poem !== undefined);
+const popularItems = ["Couplet", "Haiku", "Limerick", "Sonnet", "Villanelle"]
+  .map((type) => items.find((item) => item.name === type))
+  .filter((item): item is TypeOfItem => item !== undefined);
 
 export function Header() {
   const { data: session } = useSession();
@@ -49,7 +49,7 @@ export function Header() {
               href="/"
               className="-m-1 p-1 rounded-lg focus:outline-none focus-visible:outline-2 focus-visible:outline-gray-800"
             >
-              <span className="sr-only">Poem Generator</span>
+              <span className="sr-only">Item Generator</span>
               <ChatBubbleOvalLeftEllipsisIcon className="w-6 h-6" />
             </Link>
           </div>
@@ -89,13 +89,13 @@ export function Header() {
               >
                 <Popover.Panel className="absolute left-1/2 z-10 mt-5 flex w-screen max-w-min -translate-x-1/2 px-4">
                   <div className="w-56 shrink rounded-xl bg-white p-4 text-sm font-semibold leading-6 text-gray-900 shadow-lg ring-1 ring-gray-900/5">
-                    {popularPoems.map((poem) => (
+                    {popularItems.map((item) => (
                       <Link
-                        key={poem.name}
-                        href={poem.href}
+                        key={item.name}
+                        href={item.href}
                         className="block px-2 py-1 my-1 hover:text-gray-500 rounded-lg focus:outline-none focus-visible:outline-2 focus-visible:outline-gray-800"
                       >
-                        {poem.name}
+                        {item.name}
                       </Link>
                     ))}
                   </div>
@@ -149,7 +149,7 @@ export function Header() {
                             "block w-full text-left px-4 py-2 text-sm text-gray-700"
                           )}
                         >
-                          Generated poems
+                          Generated items
                         </Link>
                       )}
                     </Menu.Item>
@@ -192,7 +192,7 @@ export function Header() {
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-4 sm:px-6 lg:px-8 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <Link href="#" className="-m-1 p-1">
-              <span className="sr-only">Poem Generator</span>
+              <span className="sr-only">Item Generator</span>
               <ChatBubbleOvalLeftEllipsisIcon className="w-6 h-6" />
             </Link>
             <button
@@ -227,14 +227,14 @@ export function Header() {
                         />
                       </Disclosure.Button>
                       <Disclosure.Panel className="mt-2 space-y-2">
-                        {popularPoems.map((poem) => (
+                        {popularItems.map((item) => (
                           <Disclosure.Button
-                            key={poem.name}
+                            key={item.name}
                             as="a"
-                            href={poem.href}
+                            href={item.href}
                             className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                           >
-                            {poem.name}
+                            {item.name}
                           </Disclosure.Button>
                         ))}
                       </Disclosure.Panel>
@@ -264,7 +264,7 @@ export function Header() {
                       href="/saved"
                       className="-mx-3 block text-left rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     >
-                      Generated poems
+                      Generated items
                     </Link>
                     <button
                       type="button"

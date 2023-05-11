@@ -1,4 +1,4 @@
-import { Poem } from "@/types";
+import { Item } from "@/types";
 import { firestore } from "@/utilities/firestore";
 import { getServerSession } from "@/utilities/getServerSession";
 import { FieldValue } from "firebase-admin/firestore";
@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     return;
   }
 
-  const poem: Poem = await request.json();
+  const item: Item = await request.json();
 
   const {
     docs: [user],
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     .doc(user.id)
     .update({
       credits,
-      poems: FieldValue.arrayUnion(poem),
+      items: FieldValue.arrayUnion(item),
     });
 
   return new NextResponse("Success");

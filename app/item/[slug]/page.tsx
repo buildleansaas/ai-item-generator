@@ -1,7 +1,7 @@
 import { Container } from "@/components/Container";
 import { HeroPattern } from "@/components/HeroPattern";
-import { PoemGenerator } from "@/components/PoemGenerator";
-import { poems } from "@/poems";
+import { ItemGenerator } from "@/components/ItemGenerator";
+import { items } from "@/items";
 import { generateMetadataFromSlug } from "@/utilities/generateMetadataFromSlug";
 import { notFound } from "next/navigation";
 import { twMerge } from "tailwind-merge";
@@ -10,53 +10,53 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   return generateMetadataFromSlug(params.slug);
 }
 
-export default function PoemPage({
+export default function ItemPage({
   params,
 }: {
   params: {
     slug: string;
   };
 }) {
-  const poem = poems.find((poem) => poem.slug === params.slug);
+  const item = items.find((item) => item.slug === params.slug);
 
-  if (poem === undefined) {
+  if (item === undefined) {
     return notFound();
   }
 
   return (
     <Container className="pt-16 pb-24">
-      <HeroPattern className={poem.classNames.background} />
+      <HeroPattern className={item.classNames.background} />
       <h1
         className={twMerge(
           "sm:text-center text-4xl/snug sm:text-5xl/snug md:text-6xl/snug font-bold tracking-tight mb-16 sm:mb-24 lg:mb-32",
-          poem.classNames.title
+          item.classNames.title
         )}
       >
-        {poem.name} Generator
+        {item.name} Generator
       </h1>
-      <PoemGenerator type={poem.name} />
+      <ItemGenerator type={item.name} />
       <dl className="mt-24 sm:mt-32 space-y-8 divide-y divide-gray-900/10">
         <div className="pt-8 lg:grid lg:grid-cols-3 lg:gap-8">
           <dt className="text-base font-semibold leading-7 text-gray-900 lg:col-span-1">
-            What is {poem.indefiniteArticle} {poem.name.toLowerCase()}?
+            What is {item.indefiniteArticle} {item.name.toLowerCase()}?
           </dt>
           <dd className="mt-4 lg:col-span-2 lg:mt-0">
             <p className="text-base leading-7 text-gray-600">
-              {poem.description}
+              {item.description}
             </p>
           </dd>
         </div>
         <div className="pt-8 lg:grid lg:grid-cols-3 lg:gap-8">
           <dt className="text-base font-semibold leading-7 text-gray-900 lg:col-span-1">
-            How do you write {poem.indefiniteArticle} {poem.name.toLowerCase()}?
+            How do you write {item.indefiniteArticle} {item.name.toLowerCase()}?
           </dt>
           <dd className="mt-4 lg:col-span-2 lg:mt-0">
             <p className="text-base leading-7 text-gray-600 mb-4">
-              Here are the steps to write write {poem.indefiniteArticle}{" "}
-              {poem.name.toLowerCase()}:
+              Here are the steps to write write {item.indefiniteArticle}{" "}
+              {item.name.toLowerCase()}:
             </p>
             <ol className="list-decimal text-base leading-7 text-gray-600 marker:tracking-tighter">
-              {poem.steps.map((step) => {
+              {item.steps.map((step) => {
                 const summaryPosition = step.indexOf(":");
                 const [summary, complete] = [
                   step.substring(0, summaryPosition),
@@ -74,21 +74,21 @@ export default function PoemPage({
         </div>
         <div className="pt-8 lg:grid lg:grid-cols-3 lg:gap-8">
           <dt className="text-base font-semibold leading-7 text-gray-900 lg:col-span-1">
-            Example of {poem.indefiniteArticle} {poem.name.toLowerCase()}
+            Example of {item.indefiniteArticle} {item.name.toLowerCase()}
           </dt>
           <dd className="mt-4 lg:col-span-2 lg:mt-0">
             <blockquote className="relative text-base leading-7 text-gray-600 whitespace-pre">
               <div
                 className={twMerge(
                   "inline-block",
-                  poem.name === "Diamante" && "text-center"
+                  item.name === "Diamante" && "text-center"
                 )}
               >
-                {poem.example.text}
+                {item.example.text}
               </div>
             </blockquote>
             <p className="mt-16 uppercase text-sm text-gray-700">
-              <span className="text-gray-400">By</span> {poem.example.author}
+              <span className="text-gray-400">By</span> {item.example.author}
             </p>
           </dd>
         </div>

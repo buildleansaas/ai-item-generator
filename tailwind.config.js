@@ -3,7 +3,7 @@ module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./poems/**/*.{js,ts,jsx,tsx,mdx}",
+    "./items/**/*.{js,ts,jsx,tsx,mdx}",
     "./mdx-components.{js,ts,jsx,tsx}",
   ],
   theme: {
@@ -14,7 +14,7 @@ module.exports = {
       keyframes: {
         blink: {
           to: {
-            visibility: "hidden"
+            visibility: "hidden",
           },
         },
       },

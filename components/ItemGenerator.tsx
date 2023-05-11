@@ -1,6 +1,6 @@
 "use client";
 
-import { poems } from "@/poems";
+import { items } from "@/items";
 import { useId, useLayoutEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { useForm } from "react-hook-form";
@@ -10,10 +10,10 @@ import { useRouter } from "next/navigation";
 import { Options } from "@/types";
 import { Loading } from "./Loading";
 
-export function PoemGenerator({
+export function ItemGenerator({
   type,
 }: {
-  type?: (typeof poems)[number]["name"];
+  type?: (typeof items)[number]["name"];
 }) {
   const [generating, setGenerating] = useState(false);
   const [logInOpen, setLogInOpen] = useState(false);
@@ -28,7 +28,7 @@ export function PoemGenerator({
 
   const { register, handleSubmit } = useForm<Options>({
     defaultValues: {
-      type: type ?? "Random Poem",
+      type: type ?? "Random Item",
       prompt: "",
     },
   });
@@ -51,7 +51,7 @@ export function PoemGenerator({
     };
   }, []);
 
-  const generatePoem = handleSubmit((options) => {
+  const generateItem = handleSubmit((options) => {
     localStorage.setItem("options", JSON.stringify(options));
 
     if (session) {
@@ -62,10 +62,10 @@ export function PoemGenerator({
     }
   });
 
-  const poem = poems.find((poem) => poem.name === type) ?? poems[0];
+  const item = items.find((item) => item.name === type) ?? items[0];
 
   return (
-    <form className="mx-auto max-w-4xl space-y-8" onSubmit={generatePoem}>
+    <form className="mx-auto max-w-4xl space-y-8" onSubmit={generateItem}>
       <div>
         <label
           htmlFor={typeId}
@@ -74,12 +74,12 @@ export function PoemGenerator({
           <span
             className={twMerge(
               "inline-block rounded-full w-6 h-6 text-center mr-3",
-              poem.classNames.background
+              item.classNames.background
             )}
           >
             1
           </span>
-          Select the type of poem
+          Select the type of item
         </label>
         <select
           id={typeId}
@@ -89,9 +89,9 @@ export function PoemGenerator({
             required: true,
           })}
         >
-          <option>Random Poem</option>
-          {poems.map((poem) => (
-            <option key={poem.name}>{poem.name}</option>
+          <option>Random Item</option>
+          {items.map((item) => (
+            <option key={item.name}>{item.name}</option>
           ))}
         </select>
       </div>
@@ -103,19 +103,19 @@ export function PoemGenerator({
           <span
             className={twMerge(
               "inline-block rounded-full w-6 h-6 text-center mr-3",
-              poem.classNames.background
+              item.classNames.background
             )}
           >
             2
           </span>
-          Describe your poem
+          Describe your item
         </label>
         <div className="relative mt-4">
           <div
             ref={promptRef}
             className="absolute left-0 top-0 pt-3 pl-4 text-gray-900 pointer-events-none box-content"
           >
-            Write a poem about&nbsp;
+            Write a item about&nbsp;
           </div>
           <textarea
             rows={4}
@@ -135,14 +135,14 @@ export function PoemGenerator({
       <button
         className={twMerge(
           "flex w-full justify-center items-center space-x-4 rounded-xl py-3 px-4 font-medium focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 hover:brightness-95 hover:saturate-150",
-          poem.classNames.background,
-          poem.classNames.title,
-          poem.classNames.focusVisible
+          item.classNames.background,
+          item.classNames.title,
+          item.classNames.focusVisible
         )}
       >
         {generating && <Loading />}
         <span>
-          Generate poem{" "}
+          Generate item{" "}
           {session && (
             <span className="font-normal opacity-80">(1 credit)</span>
           )}

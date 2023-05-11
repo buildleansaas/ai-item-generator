@@ -1,12 +1,12 @@
-import { poems } from "@/poems";
+import { items } from "@/items";
 
 export function generateMetadataFromSlug(slug?: string) {
-  const poem = poems.find((poem) => poem.slug === slug);
-  const path = poem === undefined ? "" : `/poem/${slug}`;
-  const poemName = poem?.name ?? "Poem";
+  const item = items.find((item) => item.slug === slug);
+  const path = item === undefined ? "" : `/item/${slug}`;
+  const itemName = item?.name ?? "Item";
 
-  const title = `AI ${poemName} Generator`;
-  const description = `Automatically generate ${poemName.toLowerCase()}s using artificial intelligence. Just describe the theme of your poem and the poem generator will do all the rhyming and syllables for you.`;
+  const title = `AI ${itemName} Generator`;
+  const description = `Automatically generate ${itemName.toLowerCase()}s using artificial intelligence. Just describe the theme of your item and the item generator will do all the rhyming and syllables for you.`;
 
   return {
     title,
@@ -14,15 +14,15 @@ export function generateMetadataFromSlug(slug?: string) {
     openGraph: {
       title,
       description,
-      url: `https://poetry.tips${path}`,
-      siteName: "Poetry Tips",
+      url: `https://COMPANY_DOMAIN${path}`,
+      siteName: "COMPANY_NAME",
       type: "website",
     },
     twitter: {
       title,
       description,
       card: "summary_large_image",
-      images: [`https://poetry.tips${path}/opengraph-image`],
+      images: [`https://COMPANY_DOMAIN${path}/opengraph-image`],
     },
   };
 }

@@ -25,7 +25,7 @@ async function sendVerificationRequest({
   const transport = createTransport(provider.server);
   const result = await transport.sendMail({
     to: identifier,
-    from: '"Poetry Tips" <contact@poetry.tips>',
+    from: '"COMPANY_NAME" <contact@COMPANY_NAME>',
     subject: `Log in to ${host}`,
     text: `Click the link below to log in to ${host}\n\n${url}\n\n`,
     html: `<body>Click the link below to log in to ${escapedHost}<br/><br/><a href="${url}">Log in to ${escapedHost}</a><br/><br/></body>`,

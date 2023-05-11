@@ -6,9 +6,7 @@ export async function POST(request: NextRequest) {
   const session = await getServerSession();
   const email = session?.user?.email;
 
-  if (typeof email !== "string") {
-    return;
-  }
+  if (typeof email !== "string") return;
 
   const {
     docs: [user],
