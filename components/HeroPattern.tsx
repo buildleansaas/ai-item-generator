@@ -11,14 +11,14 @@ export function HeroPattern({ className }: HeroPatternProperties) {
       <div className="absolute left-1/2 top-0 ml-[-38rem] h-[25rem] w-[81.25rem]">
         <div
           className={twMerge(
-            "absolute inset-0 [mask-image:radial-gradient(farthest-side_at_top,white,transparent)] from-red-50 to-red-100",
+            "absolute inset-0 [mask-image:radial-gradient(farthest-side_at_top,white,transparent)] from-blue-50 to-blue-100",
             className,
             "bg-gradient-to-r"
           )}
         >
           <GridPattern
-            width={72}
-            height={56}
+            width={69}
+            height={42}
             x={-12}
             y={4}
             squares={[

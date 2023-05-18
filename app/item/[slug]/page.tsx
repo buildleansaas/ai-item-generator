@@ -46,7 +46,7 @@ export default function ItemPage({
             </p>
           </dd>
         </div>
-        <div className="pt-8 lg:grid lg:grid-cols-3 lg:gap-8">
+        {/* <div className="pt-8 lg:grid lg:grid-cols-3 lg:gap-8">
           <dt className="text-base font-semibold leading-7 text-gray-900 lg:col-span-1">
             How do you write {item.indefiniteArticle} {item.name.toLowerCase()}?
           </dt>
@@ -71,8 +71,8 @@ export default function ItemPage({
               })}
             </ol>
           </dd>
-        </div>
-        <div className="pt-8 lg:grid lg:grid-cols-3 lg:gap-8">
+        </div> */}
+        {/* <div className="pt-8 lg:grid lg:grid-cols-3 lg:gap-8">
           <dt className="text-base font-semibold leading-7 text-gray-900 lg:col-span-1">
             Example of {item.indefiniteArticle} {item.name.toLowerCase()}
           </dt>
@@ -81,7 +81,7 @@ export default function ItemPage({
               <div
                 className={twMerge(
                   "inline-block",
-                  item.name === "Diamante" && "text-center"
+                  item.name === "Weekend Getaway" && "text-center"
                 )}
               >
                 {item.example.text}
@@ -91,7 +91,7 @@ export default function ItemPage({
               <span className="text-gray-400">By</span> {item.example.author}
             </p>
           </dd>
-        </div>
+        </div> */}
       </dl>
     </Container>
   );

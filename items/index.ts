@@ -1,7 +1,7 @@
 import slugify from "@sindresorhus/slugify";
 import colors from "tailwindcss/colors";
 
-const classNames = [
+export const classNames = [
   {
     color: colors.red,
     background: "bg-gradient-to-br from-red-50 to-red-100",
@@ -126,33 +126,12 @@ const classNames = [
 export const items = (
   [
     {
-      name: "Example Name",
-      description: "Example Description",
-      example: {
-        // TODO: extend example types
-        author: "Unknown",
-        text: "",
-      },
-      steps: ["one", "two", "three"],
-    },
-    {
-      name: "Haiku",
+      href: "weekend-getaway",
+      name: "Weekend Getaway",
       description:
-        "A haiku is a traditional form of Japanese poetry consisting of three lines. It is known for its brevity and focus on capturing a single moment or observation from nature. Haiku items often evoke a sense of tranquility, simplicity, and connection with the natural world.",
-      example: {
-        author: "Matsuo Basho",
-        text: "An old silent pond...\nA frog jumps into the pond,\nsplash! Silence again.",
-      },
-      steps: [
-        "Choose a subject: Select a specific moment, scene, or aspect of nature that you want to capture in your haiku. It could be a seasonal event, a natural phenomenon, or a simple observation from the natural world.",
-        "Observe and immerse yourself: Take the time to observe your chosen subject closely. Pay attention to the sensory details, colors, sounds, and textures associated with it. Immerse yourself in the present moment and try to capture its essence.",
-        "Determine the structure: Remember that a haiku consists of three lines with a syllable pattern of 5-7-5. Decide how you will divide your thoughts or observations into these three lines while adhering to the syllable count.",
-        "Express the moment: Use precise and evocative language to convey your observation. Focus on conveying the sensory details and emotions associated with the moment. Be concise and avoid unnecessary words or explanations.",
-        "Incorporate seasonal reference: Consider including a word or phrase that alludes to the season in which the moment or observation takes place. This adds depth and context to your haiku, connecting it to the natural cycles and traditions of haiku.",
-        "Create a contrast: Introduce a contrast or a shift between the lines of your haiku to create a sense of surprise or deeper meaning. This can be a contrast in imagery, emotions, or ideas. The contrast adds depth and resonance to your haiku.",
-        "Revise and refine: After writing your initial draft, review and revise your haiku. Pay attention to the syllable count, the clarity of your expression, and the overall impact of the item. Consider if there are any words or phrases that can be refined or replaced to enhance the item's power.",
-        "Reflect and share: Read your haiku aloud and reflect on its meaning and effect. Consider the emotions and imagery it evokes. Share your haiku with others to gather feedback and perspectives.",
-      ],
+        "Start your Friday early and come home late Sunday. Let us know where you're at, what you're looking for and we'll plan a getaway for you.",
+      example:
+        "I get off work Friday at 3:00pm and would love to do something this weekend a bit spontaneously. I live in Washington, D.C. I am okay traveling up to 3 hours to go somewhere that I can enjoy good food, accessible hikes and wineries. I don't have to work until 9:00am Monday, so if the drive is not very far from where I live, maybe 1 hour, I wouldn't mind staying a night somewhere between the weekend getaway and my house to enjoy an early evening in a different town that has a nice coffee shop that I can visit before I head to work.",
     },
   ] as const
 ).map((item, index) => ({

@@ -13,6 +13,12 @@ export type Item = {
   createdAt: number;
 };
 
+export type ItineraryItem = {
+  name: string;
+  description: string;
+  example: string;
+};
+
 export type User = {
   id: string;
   email: string;

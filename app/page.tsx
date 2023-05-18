@@ -9,9 +9,17 @@ export default function HomePage() {
   return (
     <Container className="pt-16 pb-24">
       <HeroPattern />
-      <h1 className="sm:text-center text-4xl/snug sm:text-5xl/snug md:text-6xl/snug font-bold tracking-tight text-gray-800 mb-16 sm:mb-24 lg:mb-32">
-        Item Generator
-      </h1>
+      <div className="sm:text-center">
+        <h1 className="font-bold tracking-tight text-gray-800 mb-8 sm:mb-12 lg:mb-16">
+          <span className="text-4xl/snug sm:text-5xl/snug md:text-6xl/snug">
+            Let's Plan Your
+          </span>{" "}
+          <br />
+          <span className="text-5xl/snug sm:text-6xl/snug md:text-7xl/snug">
+            Dream Vacation
+          </span>
+        </h1>
+      </div>
       <ItemGenerator />
       <div className="mt-24 sm:mt-32 rounded-lg grid sm:grid-cols-2 gap-4">
         {items.map((item) => (

@@ -1,42 +1,42 @@
-import { items } from "@/items";
-import { ChatBubbleOvalLeftEllipsisIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
+// import { items } from "@/items";
+// import { ChatBubbleOvalLeftEllipsisIcon } from "@heroicons/react/24/outline";
+// import Link from "next/link";
 
-function splitIntoFourColumns<T>(array: T[], chunks: number): T[][] {
-  if (chunks < 2) return [array];
+// function splitIntoFourColumns<T>(array: T[], chunks: number): T[][] {
+//   if (chunks < 2) return [array];
 
-  let len = array.length,
-    out = [],
-    i = 0,
-    size;
+//   let len = array.length,
+//     out = [],
+//     i = 0,
+//     size;
 
-  if (len % chunks === 0) {
-    size = Math.floor(len / chunks);
-    while (i < len) {
-      out.push(array.slice(i, (i += size)));
-    }
-  } else {
-    while (i < len) {
-      size = Math.ceil((len - i) / chunks--);
-      out.push(array.slice(i, (i += size)));
-    }
-  }
+//   if (len % chunks === 0) {
+//     size = Math.floor(len / chunks);
+//     while (i < len) {
+//       out.push(array.slice(i, (i += size)));
+//     }
+//   } else {
+//     while (i < len) {
+//       size = Math.ceil((len - i) / chunks--);
+//       out.push(array.slice(i, (i += size)));
+//     }
+//   }
 
-  return out;
-}
+//   return out;
+// }
 
-const [first, second, third, fourth] = splitIntoFourColumns(items, 4);
+// const [first, second, third, fourth] = splitIntoFourColumns(items, 4);
 
 export function Footer() {
   return (
     <footer aria-labelledby="footer-heading">
-      <h2 id="footer-heading" className="sr-only">
+      {/* <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
       <div className="mx-auto max-w-7xl px-6 lg:px-8 pb-16 sm:pb-24 lg:pb-32 pt-16">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div>
-            <span className="sr-only">Item Generator</span>
+            <span className="sr-only">Your Personal Travel Planner</span>
             <ChatBubbleOvalLeftEllipsisIcon className="w-6 h-6" />
           </div>
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
@@ -94,7 +94,7 @@ export function Footer() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </footer>
   );
 }
