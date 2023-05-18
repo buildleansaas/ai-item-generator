@@ -8,9 +8,7 @@ export async function POST(request: NextRequest) {
   const session = await getServerSession();
   const email = session?.user?.email;
 
-  if (typeof email !== "string") {
-    return;
-  }
+  if (typeof email !== "string") return new NextResponse("Missing email");
 
   const item: Item = await request.json();
 
@@ -22,9 +20,7 @@ export async function POST(request: NextRequest) {
     .limit(1)
     .get();
 
-  if (user.data().credits === 0) {
-    throw new Error("User has no credits");
-  }
+  if (user.data().credits === 0) throw new Error("User has no credits");
 
   const credits =
     user.data().credits === "Unlimited"

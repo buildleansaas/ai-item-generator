@@ -19,7 +19,7 @@ export default async function BlogPage() {
       <HeroPattern className="bg-gradient-to-br from-gray-50 to-gray-100" />
       <div className="mx-auto max-w-2xl lg:max-w-4xl">
         <h1 className="sm:text-center text-4xl/snug sm:text-5xl/snug md:text-6xl/snug font-bold tracking-tight text-gray-800 mb-16 sm:mb-24 lg:mb-32">
-          Blog
+          Travel Blog
         </h1>
         <div className="mt-16 space-y-20 lg:mt-20 lg:space-y-20">
           {articles.map((article) => (

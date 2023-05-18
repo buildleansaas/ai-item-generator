@@ -4,16 +4,19 @@ import { stripe } from "@/utilities/stripe";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
-if (process.env.STRIPE_ENDPOINT_SECRET === undefined) {
+if (typeof process.env.STRIPE_ENDPOINT_SECRET !== "string")
   throw new Error("Missing Stripe endpoint secret");
-}
 
 export async function POST(request: NextRequest) {
   const signature = request.headers.get("stripe-signature");
 
+  if (!signature) return new NextResponse("Invalid signature", { status: 400 });
+  if (!process.env.STRIPE_ENDPOINT_SECRET)
+    return new NextResponse("Missing stripe endpoint secret", { status: 400 });
+
+  // TODO: set up webhook event
   const event = stripe.webhooks.constructEvent(
     await request.text(),
-    // @ts-expect-error
     signature,
     process.env.STRIPE_ENDPOINT_SECRET
   ) as Stripe.DiscriminatedEvent;
@@ -25,9 +28,8 @@ export async function POST(request: NextRequest) {
       data: [purchase],
     } = await stripe.checkout.sessions.listLineItems(session.id);
 
-    if (typeof purchase?.price?.product !== "string") {
+    if (typeof purchase?.price?.product !== "string")
       throw new Error("Could not find purchased product");
-    }
 
     const product = await stripe.products.retrieve(purchase.price.product);
 
@@ -44,9 +46,7 @@ export async function POST(request: NextRequest) {
         ? "Unlimited"
         : (user.data().credits ?? 5) + parseInt(product.metadata.credits, 10);
 
-    await firestore.collection("users").doc(user.id).update({
-      credits,
-    });
+    await firestore.collection("users").doc(user.id).update({ credits });
   }
 
   return new NextResponse("Success");

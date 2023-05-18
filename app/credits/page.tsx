@@ -27,18 +27,14 @@ export default async function CreditsPage() {
   const session = await getServerSession();
   const email = session?.user?.email;
 
-  if (typeof email !== "string") {
-    redirect("/");
-  }
+  if (typeof email !== "string") redirect("/");
 
   const { data: products } = await stripe.products.list();
 
   const tiers = (
     await Promise.all(
       products.map(async (product) => {
-        if (typeof product.default_price !== "string") {
-          return;
-        }
+        if (typeof product.default_price !== "string") return;
 
         const price = await stripe.prices.retrieve(product.default_price);
 
@@ -55,9 +51,7 @@ export default async function CreditsPage() {
           mode: "payment",
         });
 
-        if (href === null || price.unit_amount === null) {
-          return;
-        }
+        if (href === null || price.unit_amount === null) return;
 
         return {
           name: product.name,
@@ -96,12 +90,12 @@ export default async function CreditsPage() {
               href="/"
               className="text-green-600 rounded-lg focus:outline-none focus-visible:outline-2 focus-visible:outline-gray-800"
             >
-              Why not generate a item?
+              Why not generate a Itinerary?
             </Link>{" "}
             {credits !== "Unlimited" && "Or top your credits up below."}
           </>
         ) : (
-          "If you want to generate any more items, you’ll need to buy some more credits below."
+          "If you want to generate any more itineraries, you’ll need to buy some more credits below."
         )}
       </p>
       <div className="mt-8 sm:mt-12 isolate mx-auto grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
@@ -122,11 +116,11 @@ export default async function CreditsPage() {
               >
                 {tier.name}
               </h3>
-              {index === 1 ? (
+              {index === 1 && (
                 <p className="rounded-full bg-green-600/10 px-2.5 py-1 text-xs font-semibold leading-5 text-green-600">
                   Most popular
                 </p>
-              ) : null}
+              )}
             </div>
             <p className="mt-4 text-sm flex-1 leading-6 text-gray-600">
               {tier.description}
