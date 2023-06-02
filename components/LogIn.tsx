@@ -3,7 +3,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import { GiftIcon } from "@heroicons/react/24/outline";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
-import { useForm } from "react-hook-form";
 import { Loading } from "./Loading";
 
 type LogInProperties = {
@@ -17,25 +16,33 @@ export function LogIn({ open, onClose, callbackUrl }: LogInProperties) {
   const [emailLoading, setEmailLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
 
-  const { handleSubmit, register } = useForm();
+  const [email, setEmail] = useState("");
 
-  const signInWithEmail = handleSubmit(async ({ email }) => {
+  const signInWithEmail = async (e: React.FormEvent) => {
+    e.preventDefault();
     setEmailLoading(true);
-    await signIn("email", {
-      email,
-      callbackUrl,
-      redirect: false,
-    });
-    setEmailLoading(false);
-    setEmailSent(true);
-  });
+    try {
+      await signIn("email", { email, callbackUrl, redirect: false });
+    } catch (errror: Error | any) {
+      console.error(errror);
+    } finally {
+      setEmailLoading(false);
+      setEmailSent(true);
+    }
+  };
 
   const signInWithGoogle = async () => {
     setGoogleLoading(true);
-    await signIn("google", {
-      callbackUrl,
-    });
-    setGoogleLoading(false);
+    try {
+      await signIn("google", { callbackUrl });
+    } catch (error: Error | any) {
+    } finally {
+      setGoogleLoading(false);
+    }
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
   };
 
   return (
@@ -63,25 +70,18 @@ export function LogIn({ open, onClose, callbackUrl }: LogInProperties) {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-3xl bg-white px-6 pb-6 pt-8 text-left shadow-xl transition-all sm:my-8 w-full sm:max-w-sm sm:p-6">
+              <Dialog.Panel className="relative transform overflow-hidden rounded-3xl bg-white px-6 pb-6 pt-8 text-left shadow-xl transition-all sm:my-8 w-full sm:max-w-sm">
                 <div>
                   <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100">
-                    <GiftIcon
-                      className="h-6 w-6 text-blue-600"
-                      aria-hidden="true"
-                    />
+                    <GiftIcon className="h-6 w-6 text-blue-600" aria-hidden="true" />
                   </div>
                   <div className="mt-3 text-center sm:mt-5">
-                    <Dialog.Title
-                      as="h3"
-                      className="text-base font-semibold leading-6 text-gray-900"
-                    >
-                      Generate your item
+                    <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
+                      Generate your Itinerary
                     </Dialog.Title>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        Create a free account to generate 5 items for free. Get
-                        started today.
+                        Create a free account to generate 3 trips for free. Get started today.
                       </p>
                     </div>
                   </div>
@@ -98,16 +98,15 @@ export function LogIn({ open, onClose, callbackUrl }: LogInProperties) {
                       placeholder="Email address"
                       required
                       disabled={emailSent}
-                      {...register("email", {
-                        required: true,
-                      })}
+                      value={email}
+                      onChange={handleEmailChange}
                     />
                     {emailSent ? (
                       <div className="flex w-full justify-center items-center space-x-4 rounded-xl ring-1 ring-indigo-100 py-3 px-4 font-medium text-blue-600 cursor-not-allowed">
                         Check your email
                       </div>
                     ) : (
-                      <button className="flex w-full justify-center items-center space-x-4 rounded-xl bg-gradient-to-br from-indigo-50 to-indigo-100 py-3 px-4 font-medium hover:from-indigo-100 hover:to-indigo-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800">
+                      <button className="flex w-full justify-center items-center space-x-4 rounded-xl bg-gradient-to-br from-indigo-50 to-indigo-100 py-3 px-4 font-medium hover:from-indigo-100 hover:to-indigo-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 shadow-md shadow-indigo-500/10 ring-1 ring-indigo-800/5">
                         {emailLoading && <Loading />}
                         <span>Log in with email</span>
                       </button>
@@ -115,7 +114,7 @@ export function LogIn({ open, onClose, callbackUrl }: LogInProperties) {
                   </form>
                   <button
                     type="button"
-                    className="flex w-full justify-center items-center space-x-4 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 py-3 px-4 font-medium hover:from-gray-100 hover:to-gray-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800"
+                    className="flex w-full justify-center items-center space-x-4 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 py-3 px-4 font-medium hover:from-gray-100 hover:to-gray-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 shadow-md shadow-indigo-500/10 ring-1 ring-indigo-800/5"
                     onClick={signInWithGoogle}
                   >
                     {googleLoading ? (

@@ -1,5 +1,5 @@
 {
-  "name": "COMPANY_NAME",
+  "name": "my-trip-itinerary",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -26,7 +26,6 @@
     "postcss": "^8.4.23",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.43.9",
     "rehype-slug": "^5.1.0",
     "stripe": "^12.4.0",
     "tailwind-merge": "^1.12.0",

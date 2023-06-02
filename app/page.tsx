@@ -1,6 +1,9 @@
+"use client";
+
 import { Container } from "@/components/Container";
 import { HeroPattern } from "@/components/HeroPattern";
 import { ItemGenerator } from "@/components/ItemGenerator";
+import TypeWriter from "@/components/Typewriter";
 import { items } from "@/items";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
@@ -9,15 +12,18 @@ export default function HomePage() {
   return (
     <Container className="pt-16 pb-24">
       <HeroPattern />
-      <div className="sm:text-center">
+      <div className="hidden sm:mb-8 sm:flex sm:justify-center">
+        <div className="-my-2 relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-inset ring-1 ring-gray-900/5 backdrop-blur-lg backdrop-saturate-150">
+          More than 1,000 Itineraries Generated
+        </div>
+      </div>
+      <div className="sm:text-center max-w-2xl mx-auto">
         <h1 className="font-bold tracking-tight text-gray-800 mb-8 sm:mb-12 lg:mb-16">
           <span className="text-4xl/snug sm:text-5xl/snug md:text-6xl/snug">
-            Let's Plan Your
-          </span>{" "}
-          <br />
-          <span className="text-5xl/snug sm:text-6xl/snug md:text-7xl/snug">
-            Dream Vacation
+            Let&apos;s Plan Your
           </span>
+          <br />
+          <TypeWriter phrases={[...items.map((item) => item.name)]} />
         </h1>
       </div>
       <ItemGenerator />
@@ -33,7 +39,7 @@ export default function HomePage() {
           >
             <h2
               className={twMerge(
-                "text-xl font-semibold tracking-tight leading-6",
+                "text-xl/snug font-semibold tracking-tight leading-6 pr-10",
                 item.classNames.title
               )}
             >
@@ -44,7 +50,7 @@ export default function HomePage() {
             </h2>
             <p
               className={twMerge(
-                "mt-8 text-sm opacity-80 saturate-50",
+                "mt-6 text-sm opacity-80 saturate-50",
                 item.classNames.title
               )}
             >

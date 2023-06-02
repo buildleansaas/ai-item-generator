@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://www.recommend.domains/sitemap.xml",
+    sitemap: "https://www.mytripitinerary.app/sitemap.xml",
   };
 }

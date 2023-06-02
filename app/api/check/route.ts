@@ -16,9 +16,7 @@ export async function POST(request: NextRequest) {
     .limit(1)
     .get();
 
-  if (user.data().credits === 0) {
-    throw new Error("User has no credits");
-  }
+  if (user.data().credits === 0) throw new Error("User has no credits");
 
   const url = request.nextUrl.clone();
   url.pathname = "/api/generate";

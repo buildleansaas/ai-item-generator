@@ -6,19 +6,19 @@ export const articles: string[] = []; // TODO: generate by reading files in /mar
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     {
-      url: "https://www.DOMAIN",
+      url: "https://www.mytripitinerary.app",
       lastModified: new Date(),
     },
     ...items.map((item) => ({
-      url: `https://www.DOMAIN/item/${item.slug}`,
+      url: `https://www.mytripitinerary.app/item/${item.slug}`,
       lastModified: new Date(),
     })),
     {
-      url: "https://www.DOMAIN/blog",
+      url: "https://www.mytripitinerary.app/blog",
       lastModified: new Date(),
     },
     ...articles.map((slug) => ({
-      url: `https://www.DOMAIN/blog/${slug}`,
+      url: `https://www.mytripitinerary.app/blog/${slug}`,
       lastModified: new Date(),
     })),
   ];

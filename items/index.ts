@@ -123,27 +123,29 @@ export const classNames = [
   },
 ];
 
-export const items = (
-  [
-    {
-      href: "weekend-getaway",
-      name: "Weekend Getaway",
-      description:
-        "Start your Friday early and come home late Sunday. Let us know where you're at, what you're looking for and we'll plan a getaway for you.",
-      example:
-        "I get off work Friday at 3:00pm and would love to do something this weekend a bit spontaneously. I live in Washington, D.C. I am okay traveling up to 3 hours to go somewhere that I can enjoy good food, accessible hikes and wineries. I don't have to work until 9:00am Monday, so if the drive is not very far from where I live, maybe 1 hour, I wouldn't mind staying a night somewhere between the weekend getaway and my house to enjoy an early evening in a different town that has a nice coffee shop that I can visit before I head to work.",
-    },
-  ] as const
-).map((item, index) => ({
+export const items = [
+  {
+    href: "weekend-getaway",
+    name: "Weekend Getaway",
+    description:
+      "Start your Friday early and come home late Sunday. Let us know where you're at, what you're looking for and we'll plan a getaway for you.",
+    example:
+      "I get off work Friday at 3:00pm and would love to do something this weekend a bit spontaneously. I live in Washington, D.C. I am okay traveling up to 3 hours to go somewhere that I can enjoy good food, accessible hikes and wineries. I don't have to work until 9:00am Monday, so if the drive is not very far from where I live, maybe 1 hour, I wouldn't mind staying a night somewhere between the weekend getaway and my house to enjoy an early evening in a different town that has a nice coffee shop that I can visit before I head to work.",
+  },
+  {
+    href: "dream-vacation",
+    name: "Dream Vacation",
+    description:
+      "This is the vacation you've wished you always could have taken, and now can do with My Trip Itnierary App's AI trip advisor. Close your eyes and imagine, how do you want to spend your dream vacation?",
+    example:
+      "I want my wife, my two kids and I to be picked up from our house in County, State, Country at 6pm and take an overnight flight to Kauai, Hawai'i. I want to stay somewhere that is right on the oceanside, not too close or too far from a grocery store and other people, where we can swim in the morning and see a nice sunset in the evening. We love starting our day with a nice breakfast, so I'd like to have a nice breakfast place nearby. We'd like to spend our days hiking, swimming, and enjoying the beach. We'd like to have a nice dinner at a restaurant that has a nice view of the ocean. We'd like to spend 7 days there and then fly back home.",
+  },
+].map((item, index) => ({
   ...item,
   slug: slugify(item.name),
   href: "/item/" + slugify(item.name),
   classNames: classNames[index % classNames.length],
-  indefiniteArticle: ["a", "e", "i", "o", "u"].includes(
-    item.name[0].toLowerCase()
-  )
-    ? "an"
-    : "a",
+  indefiniteArticle: ["a", "e", "i", "o", "u"].includes(item.name[0].toLowerCase()) ? "an" : "a",
 }));
 
 export type TypeOfItem = (typeof items)[number];

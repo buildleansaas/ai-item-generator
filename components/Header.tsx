@@ -5,7 +5,7 @@ import { useSession, signOut } from "next-auth/react";
 import { Dialog, Menu, Popover, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
-  ChatBubbleOvalLeftEllipsisIcon,
+  GlobeAsiaAustraliaIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { twMerge } from "tailwind-merge";
@@ -38,7 +38,7 @@ export function Header() {
               className="-m-1 p-1 rounded-lg focus:outline-none focus-visible:outline-2 focus-visible:outline-gray-800"
             >
               <span className="sr-only">Your Personal Travel Planner</span>
-              {/* <ChatBubbleOvalLeftEllipsisIcon className="w-6 h-6" /> */}
+              {/* <GlobeAsiaAustraliaIcon className="w-6 h-6" /> */}
             </Link>
           </div>
           <div className="flex md:hidden">
@@ -149,7 +149,7 @@ export function Header() {
           <div className="flex items-center justify-between">
             <Link href="#" className="-m-1 p-1">
               <span className="sr-only">Your Personal Travel Planner</span>
-              <ChatBubbleOvalLeftEllipsisIcon className="w-6 h-6" />
+              <GlobeAsiaAustraliaIcon className="w-6 h-6" />
             </Link>
             <button
               type="button"

@@ -5,9 +5,12 @@ import { Options } from "@/types";
 export async function POST(request: NextRequest) {
   const options: Options = await request.json();
 
-  const content = `Write a ${
-    options.type === "Random Item" ? "item" : options.type.toLowerCase()
-  } about ${options.prompt}`;
+  // TODO: Add prompt hacking chat gpt call to verify, throw if not verified
+  // TODO: redo prompt for vacation planner
+
+  const content = `Write a ${options.type.toLowerCase()} about ${
+    options.prompt
+  }`;
 
   const stream = await createOpenAIStream({
     model: "gpt-3.5-turbo",

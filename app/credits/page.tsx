@@ -14,14 +14,13 @@ type Tier = {
   price: string;
 };
 
-// example: `https://poetry-tips-git-${process.env.VERCEL_GIT_COMMIT_REF}-gregives.vercel.app`;
-const YOUR_REVIEW_APP_VERCEL_URL = ``;
+const YOUR_REVIEW_APP_VERCEL_URL = `https://vacation-itinerary-generator-git-${process.env.VERCEL_GIT_COMMIT_REF}-buildleansaas.vercel.app`;
 
 const origin =
   process.env.VERCEL_ENV === "preview" &&
   typeof process.env.VERCEL_GIT_COMMIT_REF === "string"
     ? YOUR_REVIEW_APP_VERCEL_URL
-    : "https://www.DOMAIN";
+    : "https://www.mytripitinerary.app";
 
 export default async function CreditsPage() {
   const session = await getServerSession();

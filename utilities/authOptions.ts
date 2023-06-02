@@ -25,16 +25,15 @@ async function sendVerificationRequest({
   const transport = createTransport(provider.server);
   const result = await transport.sendMail({
     to: identifier,
-    from: '"COMPANY_NAME" <contact@COMPANY_NAME>',
+    from: '"My Trip Itinerary" <contact@mytripitinerary.app>',
     subject: `Log in to ${host}`,
     text: `Click the link below to log in to ${host}\n\n${url}\n\n`,
     html: `<body>Click the link below to log in to ${escapedHost}<br/><br/><a href="${url}">Log in to ${escapedHost}</a><br/><br/></body>`,
   });
 
   const failed = result.rejected.concat(result.pending).filter(Boolean);
-  if (failed.length) {
+  if (failed.length)
     throw new Error(`Email(s) (${failed.join(", ")}) could not be sent`);
-  }
 }
 
 export const authOptions: NextAuthOptions = {
@@ -43,13 +42,14 @@ export const authOptions: NextAuthOptions = {
     EmailProvider({
       server: {
         host: process.env.EMAIL_SERVER_HOST,
-        port: process.env.EMAIL_SERVER_PORT,
+        port: 587,
         auth: {
           user: process.env.EMAIL_SERVER_USER,
           pass: process.env.EMAIL_SERVER_PASSWORD,
         },
       },
       from: process.env.EMAIL_FROM,
+      sendVerificationRequest,
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,

@@ -25,7 +25,12 @@ export default function ItemPage({
 
   return (
     <Container className="pt-16 pb-24">
-      <HeroPattern className={item.classNames.background} />
+      <HeroPattern className={item.classNames.background} />{" "}
+      <div className="hidden sm:mb-8 sm:flex sm:justify-center">
+        <div className="-my-2 relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 backdrop-blur-lg">
+          More than 1,000 Itineraries generated
+        </div>
+      </div>
       <h1
         className={twMerge(
           "sm:text-center text-4xl/snug sm:text-5xl/snug md:text-6xl/snug font-bold tracking-tight mb-16 sm:mb-24 lg:mb-32",
