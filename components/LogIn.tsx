@@ -129,6 +129,7 @@ export function LogIn({ open, onClose, callbackUrl }: LogInProperties) {
                         className="w-4 h-4"
                         width={16}
                         height={16}
+                        unoptimized
                       />
                     )}
                     <span>Log in with Google</span>

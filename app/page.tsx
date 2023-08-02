@@ -1,6 +1,7 @@
 import { Container } from "@/components/Container";
 import { HeroPattern } from "@/components/HeroPattern";
 import { PoemGenerator } from "@/components/PoemGenerator";
+import { SocialProof } from "@/components/SocialProof";
 import { poemTypesWithoutRandom } from "@/poems";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
@@ -11,15 +12,11 @@ export const metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
   return (
     <Container className="pt-16 pb-24">
       <HeroPattern />
-      <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-        <div className="-my-2 relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-inset ring-1 ring-gray-900/5 backdrop-blur-lg backdrop-saturate-150">
-          More than 1,000 poems generated
-        </div>
-      </div>
+      <SocialProof className="text-red-800" />
       <h1 className="sm:text-center text-4xl/snug sm:text-5xl/snug md:text-6xl/snug font-bold tracking-tight text-gray-800 mb-16 sm:mb-24 lg:mb-32">
         Poem Generator
       </h1>

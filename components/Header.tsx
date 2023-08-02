@@ -126,6 +126,7 @@ export function Header() {
                         className="w-6 h-6 -my-4 ml-4 rounded-full shadow-inner"
                         width={24}
                         height={24}
+                        unoptimized
                       />
                     )}
                   </Menu.Button>
