@@ -24,6 +24,7 @@ export const articles: string[] = [
   "mastering-the-art-of-iambic-pentameter-a-guide-for-poets",
   "unlocking-the-beauty-of-sonnets-a-guide-to-understanding-and-appreciating-the-form",
   "the-sonnet-generator-unveiled-a-step-by-step-guide-to-creating-poetic-masterpieces",
+  "from-words-to-whispers-how-to-write-a-poem",
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
