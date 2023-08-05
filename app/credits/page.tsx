@@ -59,7 +59,11 @@ export default async function CreditsPage() {
             },
           ],
           mode: price.recurring ? "subscription" : "payment",
-          allow_promotion_codes: true,
+          discounts: [
+            {
+              coupon: "RElasnMv",
+            },
+          ],
         });
 
         if (href === null || price.unit_amount === null) {
@@ -71,7 +75,7 @@ export default async function CreditsPage() {
           href,
           description: product.description,
           fullPrice: `$${price.unit_amount / 100}`.replace(/\.(\d)$/, ".$10"),
-          salePrice: `$${price.unit_amount / 100}`.replace(/\.(\d)$/, ".$10"),
+          salePrice: `$${price.unit_amount / 200}`.replace(/\.(\d)$/, ".$10"),
           subscription: price.recurring !== null,
         };
       })
