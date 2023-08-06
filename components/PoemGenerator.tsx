@@ -121,7 +121,7 @@ export function PoemGenerator({ type }: PoemGeneratorProperties) {
         </label>
         <select
           id="type"
-          className="mt-4 block w-full bg-transparent backdrop-blur-sm rounded-xl border-0 py-3 pl-4 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-800"
+          className="mt-4 block w-full bg-white shadow-sm rounded-xl border-0 py-3 pl-4 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-800"
           required
           {...register("type", {
             required: true,
@@ -167,7 +167,7 @@ export function PoemGenerator({ type }: PoemGeneratorProperties) {
           <input
             id={option.name}
             placeholder={option.placeholder}
-            className="mt-4 block w-full bg-transparent backdrop-blur-sm rounded-xl border-0 py-3 pl-4 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-800"
+            className="mt-4 block w-full bg-white shadow-sm rounded-xl border-0 py-3 pl-4 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-800"
             required
             {...register(option.name, {
               required: true,
@@ -212,7 +212,7 @@ export function PoemGenerator({ type }: PoemGeneratorProperties) {
           <textarea
             rows={4}
             id="prompt"
-            className="block w-full bg-transparent backdrop-blur-sm rounded-xl border-0 py-3 px-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-800 resize-none"
+            className="block w-full bg-white shadow-sm rounded-xl border-0 py-3 px-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-800 resize-none"
             placeholder="a knight in shining armour"
             required
             style={{
