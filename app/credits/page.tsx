@@ -89,7 +89,7 @@ export default async function CreditsPage() {
     )
   )
     .filter((tier): tier is Tier => tier !== undefined)
-    .sort((a, b) => a.name.localeCompare(b.name));
+    .sort((a, b) => b.perPoem - a.perPoem);
 
   const {
     docs: [user],
@@ -107,7 +107,7 @@ export default async function CreditsPage() {
       <h1 className="text-3xl/snug sm:text-4xl/snug font-bold tracking-tight mb-4">
         {credits === 0
           ? "You've ran out of credits"
-          : `You've got ${credits.toString().toLowerCase()} credits`}
+          : `You've got ${credits.toLocaleString().toLowerCase()} credits`}
       </h1>
       <p>
         {credits !== 0 ? (
