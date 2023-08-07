@@ -22,7 +22,7 @@ export async function GET() {
   const credits: number | "Unlimited" = user.data().credits ?? FREE_CREDITS;
 
   if (credits === 0) {
-    redirect("/credits");
+    redirect("/credits?generate=true");
   } else {
     redirect("/saved?generate=true");
   }

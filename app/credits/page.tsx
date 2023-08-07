@@ -6,7 +6,7 @@ import { getServerSession } from "@/utilities/getServerSession";
 import { stripe } from "@/utilities/stripe";
 import Link from "next/link";
 import { CreditsClient } from "./client";
-import { FREE_CREDITS } from "@/utilities/constants";
+import { BASE_ORIGIN, FREE_CREDITS } from "@/utilities/constants";
 
 export type Tier = {
   name: string;
@@ -17,19 +17,17 @@ export type Tier = {
   perPoem: number;
 };
 
-const origin =
-  process.env.VERCEL_ENV === "preview" &&
-  typeof process.env.VERCEL_GIT_COMMIT_REF === "string"
-    ? `https://poetry-tips-git-${process.env.VERCEL_GIT_COMMIT_REF}-gregives.vercel.app`
-    : "https://www.poetry.tips";
-
 export const metadata = {
   alternates: {
     canonical: "/credits",
   },
 };
 
-export default async function CreditsPage() {
+export default async function CreditsPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const session = await getServerSession();
   const email = session?.user?.email;
 
@@ -50,8 +48,11 @@ export default async function CreditsPage() {
 
         const { url: href } = await stripe.checkout.sessions.create({
           customer_email: email,
-          success_url: `${origin}/credits`,
-          cancel_url: `${origin}/credits`,
+          success_url:
+            searchParams.generate === "true"
+              ? `${BASE_ORIGIN}/generate`
+              : `${BASE_ORIGIN}/credits`,
+          cancel_url: `${BASE_ORIGIN}/credits`,
           line_items: [
             {
               price: price.id,

@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { poemTypesWithoutRandom } from "@/poems";
+import { BASE_ORIGIN } from "@/utilities/constants";
 
 export const articles: string[] = [
   "10-reasons-why-using-a-poem-generator-can-boost-your-creativity",
@@ -30,19 +31,19 @@ export const articles: string[] = [
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     {
-      url: "https://www.poetry.tips",
+      url: `${BASE_ORIGIN}`,
       lastModified: new Date(),
     },
     ...poemTypesWithoutRandom.map((poemType) => ({
-      url: `https://www.poetry.tips/poem/${poemType.slug}`,
+      url: `${BASE_ORIGIN}/poem/${poemType.slug}`,
       lastModified: new Date(),
     })),
     {
-      url: "https://www.poetry.tips/blog",
+      url: `${BASE_ORIGIN}/blog`,
       lastModified: new Date(),
     },
     ...articles.map((slug) => ({
-      url: `https://www.poetry.tips/blog/${slug}`,
+      url: `${BASE_ORIGIN}/blog/${slug}`,
       lastModified: new Date(),
     })),
   ];

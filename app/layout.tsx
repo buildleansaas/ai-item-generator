@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { getServerSession } from "@/utilities/getServerSession";
 import { generateMetadataFromSlug } from "@/utilities/generateMetadataFromSlug";
 import Script from "next/script";
+import { BASE_ORIGIN } from "@/utilities/constants";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,7 +14,7 @@ const inter = Inter({
 
 export const metadata = {
   ...generateMetadataFromSlug(),
-  metadataBase: new URL("https://www.poetry.tips"),
+  metadataBase: new URL(BASE_ORIGIN),
 };
 
 export default async function RootLayout({
