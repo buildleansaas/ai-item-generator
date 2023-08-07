@@ -1,3 +1,4 @@
+import { FREE_CREDITS } from "@/utilities/constants";
 import { firestore } from "@/utilities/firestore";
 import { getServerSession } from "@/utilities/getServerSession";
 import { redirect } from "next/navigation";
@@ -18,7 +19,7 @@ export async function GET() {
     .limit(1)
     .get();
 
-  const credits: number | "Unlimited" = user.data().credits ?? 3;
+  const credits: number | "Unlimited" = user.data().credits ?? FREE_CREDITS;
 
   if (credits === 0) {
     redirect("/credits");

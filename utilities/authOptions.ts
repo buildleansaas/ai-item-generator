@@ -6,6 +6,7 @@ import EmailProvider, {
 } from "next-auth/providers/email";
 import GoogleProvider from "next-auth/providers/google";
 import { firestore } from "./firestore";
+import { track, updateUser } from "./mixpanel";
 
 if (
   process.env.GOOGLE_CLIENT_ID === undefined ||
@@ -50,4 +51,21 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
+  events: {
+    async signIn({ user }) {
+      await updateUser(user.id, {
+        $name: user.name,
+        $email: user.email,
+        $avatar: user.image,
+        // @ts-ignore
+        credits: user.credits,
+      });
+    },
+    async createUser({ user }) {
+      await track(user.id, "Signed Up");
+    },
+    async session({ session }) {
+      console.log(session);
+    },
+  },
 };

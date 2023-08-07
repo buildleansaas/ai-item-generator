@@ -6,6 +6,7 @@ import { getServerSession } from "@/utilities/getServerSession";
 import { stripe } from "@/utilities/stripe";
 import Link from "next/link";
 import { CreditsClient } from "./client";
+import { FREE_CREDITS } from "@/utilities/constants";
 
 export type Tier = {
   name: string;
@@ -13,7 +14,6 @@ export type Tier = {
   description: string;
   fullPrice: number;
   salePrice: number;
-  subscription: boolean;
   perPoem: number;
 };
 
@@ -50,7 +50,7 @@ export default async function CreditsPage() {
 
         const { url: href } = await stripe.checkout.sessions.create({
           customer_email: email,
-          success_url: `${origin}/generate`,
+          success_url: `${origin}/credits`,
           cancel_url: `${origin}/credits`,
           line_items: [
             {
@@ -58,7 +58,7 @@ export default async function CreditsPage() {
               quantity: 1,
             },
           ],
-          mode: price.recurring ? "subscription" : "payment",
+          mode: "payment",
           discounts: [
             {
               coupon: "RElasnMv",
@@ -79,7 +79,6 @@ export default async function CreditsPage() {
           description: product.description,
           fullPrice,
           salePrice,
-          subscription: price.recurring !== null,
           perPoem:
             product.metadata.credits === "Unlimited"
               ? 0
@@ -99,7 +98,7 @@ export default async function CreditsPage() {
     .limit(1)
     .get();
 
-  const credits: number | "Unlimited" = user.data().credits ?? 3;
+  const credits: number | "Unlimited" = user.data().credits ?? FREE_CREDITS;
 
   return (
     <Container className="pt-16 pb-24">

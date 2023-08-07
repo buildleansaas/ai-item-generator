@@ -1,6 +1,8 @@
 import { Poem } from "@/types";
+import { FREE_CREDITS } from "@/utilities/constants";
 import { firestore } from "@/utilities/firestore";
 import { getServerSession } from "@/utilities/getServerSession";
+import { track, updateUser } from "@/utilities/mixpanel";
 import { FieldValue } from "firebase-admin/firestore";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -26,10 +28,12 @@ export async function POST(request: NextRequest) {
     throw new Error("User has no credits");
   }
 
+  await track(user.id, "Generated Poem");
+
   const credits =
     user.data().credits === "Unlimited"
       ? "Unlimited"
-      : (user.data().credits ?? 3) - 1;
+      : (user.data().credits ?? FREE_CREDITS) - 1;
 
   await firestore
     .collection("users")
@@ -38,6 +42,10 @@ export async function POST(request: NextRequest) {
       credits,
       poems: FieldValue.arrayUnion(poem),
     });
+
+  await updateUser(user.id, {
+    credits,
+  });
 
   return new NextResponse("Success");
 }

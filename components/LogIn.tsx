@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { Loading } from "./Loading";
+import { FREE_CREDITS } from "@/utilities/constants";
 
 type LogInProperties = {
   open: boolean;
@@ -82,8 +83,8 @@ export function LogIn({ open, onClose, callbackUrl }: LogInProperties) {
                     </Dialog.Title>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        Create an account to generate 3 poems for free. Get
-                        started today.
+                        Create an account to generate {FREE_CREDITS} poems for
+                        free. Get started today.
                       </p>
                     </div>
                   </div>
