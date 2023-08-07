@@ -11,29 +11,13 @@ export function track(
   eventName: string,
   properties?: Mixpanel.PropertyDict
 ) {
-  return new Promise((resolve, reject) => {
-    mixpanel.track(
-      eventName,
-      { distinct_id: userId, ...properties },
-      (error) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(undefined);
-        }
-      }
-    );
+  return new Promise((resolve) => {
+    mixpanel.track(eventName, { distinct_id: userId, ...properties }, resolve);
   });
 }
 
 export function updateUser(userId: string, properties: Mixpanel.PropertyDict) {
-  return new Promise((resolve, reject) => {
-    mixpanel.people.set(userId, properties, (error) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(undefined);
-      }
-    });
+  return new Promise((resolve) => {
+    mixpanel.people.set(userId, properties, resolve);
   });
 }

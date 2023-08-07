@@ -64,8 +64,5 @@ export const authOptions: NextAuthOptions = {
     async createUser({ user }) {
       await track(user.id, "Signed Up");
     },
-    async session({ session }) {
-      console.log(session);
-    },
   },
 };
