@@ -69,7 +69,7 @@ export function CreditsClient({
                         ${tier.fullPrice.toString().replace(/\.(\d)$/, ".$10")}
                       </s>
                     )}{" "}
-                    <span className="text-xl ml-1">
+                    <span className="text-lg ml-1">
                       ${tier.salePrice.toString().replace(/\.(\d)$/, ".$10")}
                     </span>
                   </RadioGroup.Description>

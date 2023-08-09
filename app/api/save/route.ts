@@ -1,4 +1,4 @@
-import { Poem } from "@/types";
+import { Poem, User } from "@/types";
 import { FREE_CREDITS } from "@/utilities/constants";
 import { firestore } from "@/utilities/firestore";
 import { getServerSession } from "@/utilities/getServerSession";
@@ -24,16 +24,15 @@ export async function POST(request: NextRequest) {
     .limit(1)
     .get();
 
-  if (user.data().credits === 0) {
+  let { credits = FREE_CREDITS } = user.data() as User;
+
+  if (credits === 0) {
     throw new Error("User has no credits");
   }
 
-  await track(user.id, "Generated Poem");
+  credits = credits === "Unlimited" ? "Unlimited" : credits - 1;
 
-  const credits =
-    user.data().credits === "Unlimited"
-      ? "Unlimited"
-      : (user.data().credits ?? FREE_CREDITS) - 1;
+  await track(user.id, "Generated Poem");
 
   await firestore
     .collection("users")

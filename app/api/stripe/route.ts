@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
     const credits =
       numberOfCredits === "Unlimited"
         ? "Unlimited"
-        : (user.data().credits ?? FREE_CREDITS) + numberOfCredits;
+        : (user.get("credits") ?? FREE_CREDITS) + numberOfCredits;
 
     await firestore.collection("users").doc(user.id).update({
       credits,

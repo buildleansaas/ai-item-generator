@@ -7,6 +7,8 @@ import { stripe } from "@/utilities/stripe";
 import Link from "next/link";
 import { CreditsClient } from "./client";
 import { BASE_ORIGIN, FREE_CREDITS } from "@/utilities/constants";
+import { User } from "@/types";
+import { isBefore, startOfToday } from "date-fns";
 
 export type Tier = {
   name: string;
@@ -37,6 +39,21 @@ export default async function CreditsPage({
 
   const { data: products } = await stripe.products.list();
 
+  const {
+    docs: [user],
+  } = await firestore
+    .collection("users")
+    .where("email", "==", email)
+    .limit(1)
+    .get();
+
+  const { credits = FREE_CREDITS, poems } = user.data() as User;
+
+  const shouldOfferDiscount =
+    credits === 0 &&
+    poems !== undefined &&
+    poems.every((poem) => isBefore(poem.createdAt, startOfToday()));
+
   const tiers = (
     await Promise.all(
       products.map(async (product) => {
@@ -60,11 +77,13 @@ export default async function CreditsPage({
             },
           ],
           mode: "payment",
-          discounts: [
-            {
-              coupon: "RElasnMv",
-            },
-          ],
+          ...(shouldOfferDiscount && {
+            discounts: [
+              {
+                coupon: "RElasnMv",
+              },
+            ],
+          }),
         });
 
         if (href === null || price.unit_amount === null) {
@@ -72,7 +91,7 @@ export default async function CreditsPage({
         }
 
         const fullPrice = price.unit_amount / 100;
-        const salePrice = fullPrice / 2;
+        const salePrice = shouldOfferDiscount ? fullPrice / 2 : fullPrice;
 
         return {
           name: product.name,
@@ -90,16 +109,6 @@ export default async function CreditsPage({
   )
     .filter((tier): tier is Tier => tier !== undefined)
     .sort((a, b) => b.perPoem - a.perPoem);
-
-  const {
-    docs: [user],
-  } = await firestore
-    .collection("users")
-    .where("email", "==", email)
-    .limit(1)
-    .get();
-
-  const credits: number | "Unlimited" = user.data().credits ?? FREE_CREDITS;
 
   return (
     <Container className="pt-16 pb-24">

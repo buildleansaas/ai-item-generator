@@ -1,3 +1,4 @@
+import { User } from "@/types";
 import { firestore } from "@/utilities/firestore";
 import { getServerSession } from "@/utilities/getServerSession";
 import { NextRequest, NextResponse } from "next/server";
@@ -18,7 +19,9 @@ export async function POST(request: NextRequest) {
     .limit(1)
     .get();
 
-  if (user.data().credits === 0) {
+  const { credits } = user.data() as User;
+
+  if (credits === 0) {
     throw new Error("User has no credits");
   }
 

@@ -5,9 +5,10 @@ import { firestore } from "@/utilities/firestore";
 import { redirect } from "next/navigation";
 import { PoemCard } from "@/components/PoemCard";
 import { getServerSession } from "@/utilities/getServerSession";
-import { Poem } from "@/types";
+import { User } from "@/types";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { FREE_CREDITS } from "@/utilities/constants";
 
 export const metadata = {
   alternates: {
@@ -31,7 +32,7 @@ export default async function SavedPage() {
     .limit(1)
     .get();
 
-  const savedPoems: Poem[] = user.data().poems ?? [];
+  const { poems = [], credits = FREE_CREDITS } = user.data() as User;
 
   return (
     <Container className="pt-16 pb-24">
@@ -40,7 +41,7 @@ export default async function SavedPage() {
       <h1 className="text-3xl/snug sm:text-4xl/snug font-bold tracking-tight mb-4">
         Generated poems
       </h1>
-      {savedPoems.length > 0 && (
+      {poems.length > 0 && (
         <p>
           Here are all the poems that you&apos;ve generated.{" "}
           <Link
@@ -52,8 +53,8 @@ export default async function SavedPage() {
         </p>
       )}
       <div className="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-2 gap-4 peer">
-        {user.data().credits !== 0 && <PoemResult />}
-        {savedPoems
+        {credits !== 0 && <PoemResult />}
+        {poems
           .sort((a, b) => b.createdAt - a.createdAt)
           .map((savedPoem) => (
             <PoemCard key={savedPoem.response} poem={savedPoem}>

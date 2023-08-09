@@ -1,4 +1,5 @@
 import { poemTypes } from "@/poems";
+import { EmailTemplate } from "@/utilities/emails";
 import type Stripe from "stripe";
 
 export type PoemType = (typeof poemTypes)[number];
@@ -16,6 +17,11 @@ export type Poem = {
   createdAt: number;
 };
 
+export type Email = {
+  subject: EmailTemplate;
+  sentAt: number;
+};
+
 export type User = {
   id: string;
   email: string;
@@ -23,4 +29,5 @@ export type User = {
   customer?: Stripe.Customer;
   poems?: Poem[];
   credits?: number | "Unlimited";
+  emails?: Email[];
 };
