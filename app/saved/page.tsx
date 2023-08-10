@@ -41,17 +41,15 @@ export default async function SavedPage() {
       <h1 className="text-3xl/snug sm:text-4xl/snug font-bold tracking-tight mb-4">
         Generated poems
       </h1>
-      {poems.length > 0 && (
-        <p>
-          Here are all the poems that you&apos;ve generated.{" "}
-          <Link
-            href="/"
-            className="text-blue-600 rounded-lg focus:outline-none focus-visible:outline-2 focus-visible:outline-gray-800"
-          >
-            Generate another?
-          </Link>
-        </p>
-      )}
+      <p>
+        Here are all the poems that you&apos;ve generated.{" "}
+        <Link
+          href="/"
+          className="text-blue-600 rounded-lg focus:outline-none focus-visible:outline-2 focus-visible:outline-gray-800"
+        >
+          Generate another?
+        </Link>
+      </p>
       <div className="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-2 gap-4 peer">
         {credits !== 0 && <PoemResult />}
         {poems
