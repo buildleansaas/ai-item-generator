@@ -56,12 +56,20 @@ export async function sendEmail<TEmailTemplate extends EmailTemplate>(
     return;
   }
 
-  const response = api.sendTransacEmail({
-    bcc: emailArray.map((email) => ({ email })),
-    subject: emailTemplate,
-    // @ts-ignore
-    ...emailTemplates[emailTemplate].apply(null, emailParams),
-  });
+  const response = Promise.allSettled(
+    emailArray.map((email) =>
+      api.sendTransacEmail({
+        to: [
+          {
+            email,
+          },
+        ],
+        subject: emailTemplate,
+        // @ts-ignore
+        ...emailTemplates[emailTemplate].apply(null, emailParams),
+      })
+    )
+  );
 
   const batch = firestore.batch();
 
