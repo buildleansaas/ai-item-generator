@@ -57,7 +57,7 @@ export async function sendEmail<TEmailTemplate extends EmailTemplate>(
   }
 
   const response = api.sendTransacEmail({
-    to: emailArray.map((email) => ({ email })),
+    bcc: emailArray.map((email) => ({ email })),
     subject: emailTemplate,
     // @ts-ignore
     ...emailTemplates[emailTemplate].apply(null, emailParams),
