@@ -65,36 +65,36 @@ export async function sendEmail<TEmailTemplate extends EmailTemplate>(
     return;
   }
 
-  const response = Promise.allSettled(
-    emailArray.map((email) =>
-      api.sendTransacEmail({
-        to: [
-          {
-            email,
-          },
-        ],
+  await Promise.allSettled(
+    emailArray.map(async (email) => {
+      const {
+        docs: [user],
+      } = await firestore
+        .collection("users")
+        .where("email", "==", email)
+        .limit(1)
+        .get();
+
+      if (user === undefined) {
+        return;
+      }
+
+      await firestore
+        .collection("users")
+        .doc(user.id)
+        .update({
+          emails: FieldValue.arrayUnion({
+            subject: emailTemplate,
+            sentAt: Date.now(),
+          }),
+        });
+
+      await api.sendTransacEmail({
+        to: [{ email }],
         subject: emailTemplate,
         // @ts-ignore
         ...emailTemplates[emailTemplate].apply(null, emailParams),
-      })
-    )
+      });
+    })
   );
-
-  const batch = firestore.batch();
-
-  const { docs: users } = await firestore
-    .collection("users")
-    .where("email", "in", emailArray)
-    .get();
-
-  for (const user of users) {
-    batch.update(user.ref, {
-      emails: FieldValue.arrayUnion({
-        subject: emailTemplate,
-        sentAt: Date.now(),
-      }),
-    });
-  }
-
-  await Promise.all([batch.commit(), response]);
 }
