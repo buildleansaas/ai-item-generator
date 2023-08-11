@@ -24,6 +24,7 @@ export async function SocialProof({ className }: SocialProofProperties) {
           <Image
             className="relative z-30 inline-block h-6 w-6 rounded-full ring-2 ring-white"
             src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?auto=format&fit=facearea&facepad=2&w=48&h=48&q=80"
+            unoptimized
             alt=""
             width={24}
             height={24}
@@ -31,6 +32,7 @@ export async function SocialProof({ className }: SocialProofProperties) {
           <Image
             className="relative z-20 inline-block h-6 w-6 rounded-full ring-2 ring-white"
             src="https://images.unsplash.com/photo-1550525811-e5869dd03032?auto=format&fit=facearea&facepad=2&w=48&h=48&q=80"
+            unoptimized
             alt=""
             width={24}
             height={24}
@@ -38,6 +40,7 @@ export async function SocialProof({ className }: SocialProofProperties) {
           <Image
             className="relative z-10 inline-block h-6 w-6 rounded-full ring-2 ring-white"
             src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=facearea&facepad=2.25&w=48&h=48&q=80"
+            unoptimized
             alt=""
             width={24}
             height={24}
@@ -45,6 +48,7 @@ export async function SocialProof({ className }: SocialProofProperties) {
           <Image
             className="relative z-0 inline-block h-6 w-6 rounded-full ring-2 ring-white"
             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=facearea&facepad=2&w=48&h=48&q=80"
+            unoptimized
             alt=""
             width={24}
             height={24}
