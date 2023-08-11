@@ -59,3 +59,5 @@ export async function GET() {
 
   return new NextResponse("Success");
 }
+
+export const revalidate = 0;
