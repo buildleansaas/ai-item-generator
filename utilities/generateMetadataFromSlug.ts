@@ -9,7 +9,7 @@ export function generateMetadataFromSlug(slug?: string) {
   const description = `Automatically generate ${poemName.toLowerCase()}s using artificial intelligence. Just describe the theme of your poem and the free ${poemName.toLowerCase()} generator will do the rest.`;
 
   return {
-    title: `${title} — Best ${poemName} Maker 2023`,
+    title: `${title}: Best ${poemName} Maker (Free)`,
     description,
     openGraph: {
       title,
