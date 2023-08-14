@@ -8,7 +8,6 @@ import Link from "next/link";
 import { CreditsClient } from "./client";
 import { BASE_ORIGIN, FREE_CREDITS } from "@/utilities/constants";
 import { User } from "@/types";
-import { isBefore, startOfToday } from "date-fns";
 
 export type Tier = {
   name: string;
@@ -47,12 +46,7 @@ export default async function CreditsPage({
     .limit(1)
     .get();
 
-  const { credits = FREE_CREDITS, poems } = user.data() as User;
-
-  const shouldOfferDiscount =
-    credits === 0 &&
-    poems !== undefined &&
-    poems.every((poem) => isBefore(poem.createdAt, startOfToday()));
+  const { credits = FREE_CREDITS } = user.data() as User;
 
   const tiers = (
     await Promise.all(
@@ -77,13 +71,11 @@ export default async function CreditsPage({
             },
           ],
           mode: "payment",
-          ...(shouldOfferDiscount && {
-            discounts: [
-              {
-                coupon: "RElasnMv",
-              },
-            ],
-          }),
+          discounts: [
+            {
+              coupon: "RElasnMv",
+            },
+          ],
         });
 
         if (href === null || price.unit_amount === null) {
@@ -91,7 +83,7 @@ export default async function CreditsPage({
         }
 
         const fullPrice = price.unit_amount / 100;
-        const salePrice = shouldOfferDiscount ? fullPrice / 2 : fullPrice;
+        const salePrice = fullPrice / 2;
 
         return {
           name: product.name,
@@ -116,7 +108,9 @@ export default async function CreditsPage({
       <h1 className="text-3xl/snug sm:text-4xl/snug font-bold tracking-tight mb-4">
         {credits === 0
           ? "You've ran out of credits"
-          : `You've got ${credits.toLocaleString().toLowerCase()} credits`}
+          : `You've got ${credits.toLocaleString().toLowerCase()} credit${
+              credits === 1 ? "s" : ""
+            }`}
       </h1>
       <p>
         {credits !== 0 ? (
