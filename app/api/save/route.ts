@@ -32,7 +32,9 @@ export async function POST(request: NextRequest) {
 
   credits = credits === "Unlimited" ? "Unlimited" : credits - 1;
 
-  await track(user.id, "Generated Poem");
+  await track(user.id, "Generated Poem", {
+    type: poem.options.type,
+  });
 
   await firestore
     .collection("users")

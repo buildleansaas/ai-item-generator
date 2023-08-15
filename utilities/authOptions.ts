@@ -38,7 +38,9 @@ export const authOptions: NextAuthOptions = {
       });
     },
     async createUser({ user }) {
-      await track(user.id, "Signed Up");
+      await track(user.id, "Signed Up", {
+        method: user.name === undefined ? "Email" : "OAuth",
+      });
     },
   },
 };
