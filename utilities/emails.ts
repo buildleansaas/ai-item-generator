@@ -75,19 +75,17 @@ export async function sendEmail<TEmailTemplate extends EmailTemplate>(
         .limit(1)
         .get();
 
-      if (user === undefined) {
-        return;
+      if (user !== undefined) {
+        await firestore
+          .collection("users")
+          .doc(user.id)
+          .update({
+            emails: FieldValue.arrayUnion({
+              subject: emailTemplate,
+              sentAt: Date.now(),
+            }),
+          });
       }
-
-      await firestore
-        .collection("users")
-        .doc(user.id)
-        .update({
-          emails: FieldValue.arrayUnion({
-            subject: emailTemplate,
-            sentAt: Date.now(),
-          }),
-        });
 
       await api.sendTransacEmail({
         to: [{ email }],
